@@ -22,4 +22,11 @@
         android:name="com.parapf.eventsync.ui.RegisteredEvents.RegisteredEventsFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_registered_events" />
+
+
+    <action
+        android:id="@+id/action_events_to_registered"
+        app:destination="@id/nav_registered_events" />
+
+
 </navigation>

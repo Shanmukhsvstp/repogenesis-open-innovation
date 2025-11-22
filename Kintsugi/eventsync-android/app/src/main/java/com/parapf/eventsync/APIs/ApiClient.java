@@ -1,6 +1,10 @@
 package com.parapf.eventsync.APIs;
 
 import android.content.Context;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -23,10 +27,16 @@ public class ApiClient {
                     .addInterceptor(logging)
                     .build();
 
+            // Configure Gson to handle nulls properly
+            Gson gson = new GsonBuilder()
+                    .serializeNulls()  // Serialize null values
+                    .setLenient()      // Be lenient with JSON parsing
+                    .create();
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit.create(ApiService.class);

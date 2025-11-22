@@ -55,17 +55,34 @@
         app:layout_constraintTop_toBottomOf="@+id/topBar"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <ProgressBar
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/loadingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/eventsRecycler"
-        app:layout_constraintBottom_toBottomOf="@id/eventsRecycler"
+        app:trackColor="#633B82F6"
+        android:indeterminate="true"
+        app:indicatorColor="@color/light_primary"
+        app:layout_constraintTop_toTopOf="@+id/eventsRecycler"
+        app:layout_constraintBottom_toBottomOf="@+id/eventsRecycler"
         app:layout_constraintStart_toStartOf="@id/eventsRecycler"
-        app:layout_constraintEnd_toEndOf="@id/eventsRecycler"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        app:layout_constraintEnd_toEndOf="@+id/eventsRecycler"
+        style="@style/Widget.Material3.CircularProgressIndicator.Small"
+        android:progressTint="@color/light_primary"/>
 
-
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/outfit_semibold"
+        android:gravity="center"
+        android:padding="30dp"
+        android:visibility="gone"
+        android:text="No events at the moment :)"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

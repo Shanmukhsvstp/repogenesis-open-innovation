@@ -16,6 +16,10 @@
     <color name="light_card">#FFFFFF</color>
     <color name="dark_card">#262626</color>
 
+    <color name="success_green">#4CAF50</color>
+
+
+
     <color name="light_card_foreground">#333333</color>
     <color name="dark_card_foreground">#E5E5E5</color>
 

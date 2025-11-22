@@ -57,4 +57,5 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation ("com.airbnb.android:lottie:6.1.0")
+    implementation("com.google.android.gms:play-services-code-scanner:16.1.0")
 }

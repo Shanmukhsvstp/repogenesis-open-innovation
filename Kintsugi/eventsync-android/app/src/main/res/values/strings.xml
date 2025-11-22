@@ -11,4 +11,20 @@
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Events</string>
     <string name="menu_slideshow">Registered Events</string>
+
+
+    <!-- Event Details Bottom Sheet -->
+    <string name="event_image">Event Image</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="location">Location</string>
+    <string name="max_capacity">Max Capacity</string>
+    <string name="registration_deadline">Registration Deadline</string>
+    <string name="close">Close</string>
+    <string name="register_now">Register Now</string>
+
+    <!-- Page Block Types -->
+    <string name="video_content">Video: %1$s</string>
+    <string name="unknown_block_type">Unknown block type: %1$s</string>
+
 </resources>

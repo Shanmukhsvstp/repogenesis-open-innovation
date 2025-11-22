@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,8 @@ public class Events extends AppCompatActivity {
 
     private static final String TAG = "EventsPage";
 
+    TextView empty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,9 @@ public class Events extends AppCompatActivity {
 
         findViewById(R.id.finit).setOnClickListener(v -> finish());
 
+
+        empty = findViewById(R.id.empty_view);
+
         eventsRecycler = findViewById(R.id.eventsRecycler);
         loadingBar = findViewById(R.id.loadingBar);
 
@@ -58,12 +64,14 @@ public class Events extends AppCompatActivity {
                 new ItemEventsAdapter.OnEventClickListener() {
                     @Override
                     public void onLearnMore(EventModel event) {
-                        // TODO open event details
+                        // Show bottom sheet with event details
+                        showEventDetails(event.getId());
                     }
 
                     @Override
                     public void onRegister(EventModel event) {
-                        // TODO start registration activity
+                        // TODO: start registration activity
+                        showEventDetails(event.getId());
                     }
                 }
         );
@@ -74,6 +82,11 @@ public class Events extends AppCompatActivity {
         fetchEvents();
     }
 
+    private void showEventDetails(String eventId) {
+        EventDetailsBottomSheet bottomSheet = EventDetailsBottomSheet.newInstance(eventId);
+        bottomSheet.show(getSupportFragmentManager(), "EventDetailsBottomSheet");
+    }
+
     private void fetchEvents() {
         loadingBar.setVisibility(View.VISIBLE);
 
@@ -82,8 +95,6 @@ public class Events extends AppCompatActivity {
         Call<EventsListResponse> call = api.getEventsList(
                 1,
                 20,
-//                "published",
-//                true,
                 "startDate",
                 "asc"
         );
@@ -95,6 +106,7 @@ public class Events extends AppCompatActivity {
 
                 if (!response.isSuccessful() || response.body() == null) {
                     Log.e(TAG, "API Error: " + response.code());
+                    empty.setVisibility(View.VISIBLE);
                     return;
                 }
 
@@ -103,14 +115,16 @@ public class Events extends AppCompatActivity {
                 List<EventsListResponse.Event> apiEvents = result.getData().getEvents();
                 eventList.clear();
 
-                // Convert API model to your EventModel
+                // Convert API model to your EventModel - NOW WITH ID
                 for (EventsListResponse.Event e : apiEvents) {
-                    eventList.add(new EventModel(
+                    EventModel model = new EventModel(
+                            e.getId(),  // ADD THIS - Pass the event ID
                             e.getTitle(),
                             e.getDescription(),
                             e.getStartDate(),
                             e.getLocation()
-                    ));
+                    );
+                    eventList.add(model);
                 }
 
                 adapter.notifyDataSetChanged();

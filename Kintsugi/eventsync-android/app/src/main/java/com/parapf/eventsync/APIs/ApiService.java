@@ -2,16 +2,21 @@ package com.parapf.eventsync.APIs;
 
 import com.parapf.eventsync.APIs.Requests.SignInRequest;
 import com.parapf.eventsync.APIs.Requests.SignUpRequest;
+import com.parapf.eventsync.APIs.Responses.EventResponse;
 import com.parapf.eventsync.APIs.Responses.EventsListResponse;
+import com.parapf.eventsync.APIs.Responses.MyEventsResponse;
 import com.parapf.eventsync.APIs.Responses.SessionResponse;
 import com.parapf.eventsync.APIs.Responses.SignInResponse;
 import com.parapf.eventsync.APIs.Responses.SignUpResponse;
+import com.parapf.eventsync.APIs.Responses.UserRegistrationsResponse;
+import com.parapf.eventsync.APIs.Responses.UserResponse;
 
 import retrofit2.Call; // <--- Import Call
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -44,4 +49,16 @@ public interface ApiService {
             @Query("sortOrder") String sortOrder
     );
 
+    @GET("api/events/{id}")
+    Call<EventResponse> getEventById(@Path("id") String eventId);
+
+
+    @GET("api/manager/events")
+    Call<MyEventsResponse> getMyEvents(@Header("Cookie") String cookieHeader);
+    @GET("api/user/registrations")
+    Call<UserRegistrationsResponse> getUserRegistrations(@Header("Cookie") String cookieHeader);
+
+
+    @GET("api/user")
+    Call<UserResponse> getCurrentUser(@Header("Cookie") String cookieHeader);
 }

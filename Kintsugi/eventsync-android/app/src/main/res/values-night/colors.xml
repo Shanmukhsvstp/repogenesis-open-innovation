@@ -42,6 +42,8 @@
 
     <color name="outline_btn_bg">#262626</color>
 
+    <color name="light_background">#2C2C2C</color>
+
     <color name="gray_outline">#404040</color>
     <!-- a lighter version of primary for dark themes -->
 

@@ -58,7 +58,7 @@ public class EventsListResponse {
     }
 
     // ============================
-    // Event Class
+    // Event Class (NO page field)
     // ============================
     public static class Event {
 
@@ -76,6 +76,8 @@ public class EventsListResponse {
         private String teamId;
         private String createdAt;
         private String updatedAt;
+
+        // REMOVED: page field (not needed in list response)
 
         // --- Getters & Setters ---
         public String getId() {
@@ -195,14 +197,12 @@ public class EventsListResponse {
     // Pagination Class
     // ============================
     public static class Pagination {
-
         private int page;
         private int limit;
         private int total;
         private int totalPages;
         private boolean hasMore;
 
-        // --- Getters & Setters ---
         public int getPage() {
             return page;
         }
